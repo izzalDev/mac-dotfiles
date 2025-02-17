@@ -1,0 +1,16 @@
+#!/bin/bash
+
+APP2QUIT=$(osascript -e 'tell application "System Events"
+    set appProcesses to every application process whose visible is true
+    set output to ""
+    repeat with appProcess in appProcesses
+        set appName to name of appProcess
+        set windowCount to count of windows of appProcess
+        if windowCount is 0 then
+          set output to output & appName & "\n"
+        end if
+    end repeat
+    return output
+  end tell')
+
+killall $APP2QUIT
